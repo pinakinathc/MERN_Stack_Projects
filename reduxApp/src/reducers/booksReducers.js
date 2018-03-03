@@ -3,18 +3,17 @@
 // Books reducers
 export function booksReducers(state={books:[
   {
-    id: 1,
+    _id: 1,
     title:'this is the book title',
     description: 'this is the book description',
     price: 33.33
   },
   {
-    id: 2,
+    _id: 2,
     title: 'this is the second book title',
     description: 'this is the second book description',
     price: 50
   }
-
   ]}, action){
   switch(action.type){
     case "GET_BOOKS":
@@ -28,7 +27,7 @@ export function booksReducers(state={books:[
       const currentBookToDelete = [...state.books];
       const indexToDelete = currentBookToDelete.findIndex(
         function(book){
-          return book.id === action.payload.id;
+          return book._id === action.payload._id;
         }
       )
       return {books: [...currentBookToDelete.slice(0, indexToDelete),
@@ -37,10 +36,16 @@ export function booksReducers(state={books:[
     case 'UPDATE_BOOK':
       const currentBookToUpdate = [...state.books];
       const indexToUpdate = currentBookToUpdate.findIndex(function(book){
-        return book.id === action.payload.id;});
+        console.log('===indexToUpdate first call====',book._id );
+        console.log('=====indexToUpdate=====',action.payload._id);
+        return book._id === action.payload._id;});
+      console.log('=======checking update Book====',currentBookToUpdate);
+      console.log('========update book log action=======',action.payload);
       const newBookToUpdate = {...currentBookToUpdate[indexToUpdate],
-                               title: action.payload.title}
-      console.log('This is what is looks like: '+newBookToUpdate);
+                               title: action.payload.title,
+                               description: action.payload.description,
+                               price: action.payload.price}
+      console.log('========checking=======',newBookToUpdate);
       return {books: [...currentBookToUpdate.slice(0, indexToUpdate),
                       newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate+1)]};
   }

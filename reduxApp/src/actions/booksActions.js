@@ -24,6 +24,7 @@ export function deleteBooks(id){
 
 //Update a book
 export function updateBooks(book){
+  console.log('====calling from updateBooks=====', book);
   return {
     type: 'UPDATE_BOOK',
     payload: book

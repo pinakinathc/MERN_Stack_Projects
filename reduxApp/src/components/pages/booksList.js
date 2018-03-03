@@ -4,24 +4,25 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getBooks} from '../../actions/booksActions';
 import {Grid, Col, Row, Button} from 'react-bootstrap';
+
 import BookItem from './bookItem';
 import BooksForm from './booksForm';
+import Cart from './cart';
 
 class BooksList extends React.Component{
 	componentDidMount(){
 		// Dispatch an action
-		console.log('========This is componentDidMount being called======')
 		this.props.getBooks();
 	}
 
 	render(){
-		console.log('============This is render being called=============')
 		const booksList = this.props.books.map(function(booksArr){
 			return (
-				<Col xs={12} sm={6} md={4} key={booksArr.id}>
+				<Col xs={12} sm={6} md={4} key={booksArr._id}>
 					<BookItem
-						id = {booksArr.id}
-						title = {booksArr.description}
+						_id = {booksArr._id}
+						title = {booksArr.title}
+						description = {booksArr.description}
 						price = {booksArr.price}
 					/>
 				</Col>
@@ -29,6 +30,9 @@ class BooksList extends React.Component{
 		})
 		return(
 			<Grid>
+				<Row>
+					<Cart />
+				</Row>
 				<Row>
 					<Col xs={12} sm={6}>
 					<BooksForm />
