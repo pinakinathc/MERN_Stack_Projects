@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Panel, Col, Row, Well, Button, ButtonGroup, Label, Modal} from 'react-bootstrap';
 import {bindActionCreators} from 'redux';
-import {deleteCartItem, updateCart} from '../../actions/cartActions';
+import {deleteCartItem, updateCart, calculateTotal} from '../../actions/cartActions';
 
 class Cart extends React.Component{
 	constructor(){
@@ -13,6 +13,7 @@ class Cart extends React.Component{
 		}
 	}
 	open(){
+		let temp = this.props.calculateTotal(this.props.cart);
 		this.setState({showModal: true})
 	}
 	close(){
@@ -50,6 +51,7 @@ class Cart extends React.Component{
 	}
 
 	renderCart(){
+		console.log('========testing=======', this.props.finalAmount);
 		const cartItemsList = this.props.cart.map(function(cartArr){
 			return (
 				<Panel headerkey={cartArr._id}>
@@ -94,6 +96,7 @@ class Cart extends React.Component{
 				</Modal.Header>
 				<Modal.Body>
 					<h6>Your order has been saved</h6>
+					<p> Total Sum: {this.props.finalAmount}</p>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button onClick={this.close.bind(this)}>Close</Button>
@@ -105,13 +108,16 @@ class Cart extends React.Component{
 	}
 }
 function mapStateToProps(state){
-	return{cart: state.cart.cart}
+	console.log('========testing Re=======', state.cart.finalAmount);
+	return{cart: state.cart.cart,
+		finalAmount: state.cart.finalAmount}
 }
 
 function mapDispatchToProps(dispatch){
 	return bindActionCreators({
 		deleteCartItem: deleteCartItem,
-		updateCart: updateCart
+		updateCart: updateCart,
+		calculateTotal: calculateTotal
 	}, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

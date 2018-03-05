@@ -22,3 +22,11 @@ export function updateCart(_id, unit){
 		unit: unit
 	}
 }
+
+export function calculateTotal(cart){
+	console.log('========calculateTotal value=====', cart)
+	return{
+		type: "CALCULATE_TOTAL",
+		payload: cart
+	}
+}

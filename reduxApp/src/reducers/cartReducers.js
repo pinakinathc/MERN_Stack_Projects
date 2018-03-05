@@ -1,6 +1,6 @@
 'use strict'
 //CART REDUCERS
-export function cartReducers(state={cart:[]}, action){
+export function cartReducers(state={cart:[], finalAmount:0}, action){
   switch(action.type){
     case "ADD_TO_CART":
       return { ...state, cart:action.payload}
@@ -28,6 +28,13 @@ export function cartReducers(state={cart:[]}, action){
     }
     return {...state, cart: [...currentCartToUpdate.slice(0, indexToUpdate),
         newCartToUpdate, ...currentCartToUpdate.slice(indexToUpdate+1)]};
+
+    case  "CALCULATE_TOTAL":
+      let total = 0.0;
+      action.payload.map(function(cartArr){
+        total += cartArr.quantity * cartArr.price;
+      });
+      return {...state, finalAmount: total};
   }
   return state
 }

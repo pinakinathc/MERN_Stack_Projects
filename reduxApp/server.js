@@ -6,7 +6,13 @@ var path = require('path');
 // Middleware to define folder for static files
 app.use(express.static('public'))
 
-app.get('/', function(req, res){
+app.use('/', function(req, res){
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
+app.use('/admin', function(req, res){
+  res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
+app.use('/cart', function(req, res){
   res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
 })
 

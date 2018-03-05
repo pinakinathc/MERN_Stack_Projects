@@ -45,6 +45,7 @@ class BooksList extends React.Component{
 }
 
 function mapStateToProps(state){
+		console.log('just checking', state)
 		return{books: state.books.books}
 }
 
