@@ -17,7 +17,6 @@ export function cartReducers(state={cart:[], finalAmount:0}, action){
     const currentCartToUpdate = [...state.cart];
     const indexToUpdate = action._id;
     console.log('======newBookToUpdate=====',currentCartToUpdate[indexToUpdate]);
-    console.log('check it man')
     let newCartToUpdate;
     if ( currentCartToUpdate[indexToUpdate].quantity <= 0 && action.unit===-1){
       newCartToUpdate = {...currentCartToUpdate[indexToUpdate],

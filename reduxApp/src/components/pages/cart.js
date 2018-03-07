@@ -51,11 +51,10 @@ class Cart extends React.Component{
 	}
 
 	renderCart(){
-		console.log('========testing=======', this.props.finalAmount);
 		const cartItemsList = this.props.cart.map(function(cartArr){
 			return (
-				<Panel headerkey={cartArr._id}>
-				<Row key={cartArr._id}>
+				<Panel >
+				<Row >
 					<Col xs={12} sm={4}>
 						<h6>{cartArr.title}</h6><span>    </span>
 					</Col>
@@ -108,7 +107,6 @@ class Cart extends React.Component{
 	}
 }
 function mapStateToProps(state){
-	console.log('========testing Re=======', state.cart.finalAmount);
 	return{cart: state.cart.cart,
 		finalAmount: state.cart.finalAmount}
 }

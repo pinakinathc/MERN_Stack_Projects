@@ -27,7 +27,6 @@ class BookItem extends React.Component{
 			description: findDOMNode(this.refs.description).value,
 			price: findDOMNode(this.refs.price).value,
 		}
-		console.log('========hello baby!!=====',book);
 		this.props.updateBooks(book);
 	}
 	handleCart(){
@@ -50,7 +49,7 @@ class BookItem extends React.Component{
 						<h6>Title: {this.props.title} 
 						<Button onClick={this.open.bind(this)} bsStyle='link pull-right'>
 						<Glyphicon glyph="pencil"/>
-						Edit it Baby!!
+						Edit !!
 						</Button>
 						</h6>
 						<h6>Description: {this.props.description}</h6>
